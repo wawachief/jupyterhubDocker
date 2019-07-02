@@ -31,7 +31,7 @@ http://127.0.0.1:8000 (ou http://_votre_adresse_ip:8000 via le réseau). Vous po
 ## Quelques commandes docker utiles :
 - Pour fermer l'image, tapez CTRL+C
 
-- Pour réouvrir à nouveau cette image, 
+- Pour réouvrir à nouveau ce container, 
 ```console
 docker start -i jupyterhub
 ```
