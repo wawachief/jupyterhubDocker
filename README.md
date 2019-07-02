@@ -1,4 +1,4 @@
-# Installation automatique de upyterHub via docker
+# Installation automatique de JupyterHub via docker
 
 **JupyterHub** est un outil permettant d'ajouter une fonctionnalité multi-utilisateurs à Jupyter. nbgrader s'intègre à cette configuration afin de rendre automatique la soumission et la récupération des travaux. Il nécessite par contre l'utilisation dans le lycée d'un serveur hébergeant la solution. Disposer d'un tel outil permet d'éviter d'avoir à installer jupyter en local car un accès distant via le navigateur suffit.
 
