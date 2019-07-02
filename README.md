@@ -1,5 +1,4 @@
-# jupyterhubDocker
-Installation automatique de **jupyterHub** via **docker**
+# Installation automatique de upyterHub via docker
 
 **JupyterHub** est un outil permettant d'ajouter une fonctionnalité multi-utilisateurs à Jupyter. nbgrader s'intègre à cette configuration afin de rendre automatique la soumission et la récupération des travaux. Il nécessite par contre l'utilisation dans le lycée d'un serveur hébergeant la solution. Disposer d'un tel outil permet d'éviter d'avoir à installer jupyter en local car un accès distant via le navigateur suffit.
 
@@ -20,10 +19,14 @@ cd jupyterhub
 docker build -t jhub_srv .
 ```
 N'oubliez pas le . à la fin de la seconde commande !
+
 4. Lancez votre image
 ```console
 docker run -i -p8000:8000 --name jupyterhub jhub_srv
 ```
+
+Le serveur **jupyterhub** est à présent opérationnel. Ouvrez un navigateur et allez à l'adresse\\
+http://127.0.0.1:8000 ou http://_votre_adresse_ip:8000
 
 ## Quelques commandes docker utiles :
 - Pour fermer l'image, tapez CTRL+C
