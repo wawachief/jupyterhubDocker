@@ -25,8 +25,8 @@ N'oubliez pas le . à la fin de la seconde commande !
 docker run -i -p8000:8000 --name jupyterhub jhub_srv
 ```
 
-Le serveur **jupyterhub** est à présent opérationnel. Ouvrez un navigateur et allez à l'adresse\\
-http://127.0.0.1:8000 ou http://_votre_adresse_ip:8000
+Le serveur **jupyterhub** est à présent opérationnel. Ouvrez un navigateur et allez à l'adresse
+http://127.0.0.1:8000 (ou http://_votre_adresse_ip:8000 via le réseau). Vous pouvez commencer à tester un compte prof en utilisant les logins présents dans le fichier comptes.csv (par exemple prof1 / wawa)
 
 ## Quelques commandes docker utiles :
 - Pour fermer l'image, tapez CTRL+C
