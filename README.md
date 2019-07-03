@@ -17,6 +17,8 @@ docker.io est la version de docker packagée par debian/ubuntu. Si vous rencontr
 
 https://www.digitalocean.com/community/tutorials/comment-installer-et-utiliser-docker-sur-ubuntu-18-04-fr
 
+Utiliser une ou l'autre de ces versions ne changera rien pour la suite.
+
 3. Allez dans le dossier *jupyterhub* et construisez votre image Docker
 ```console
 cd jupyterhubDocker
