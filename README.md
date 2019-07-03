@@ -34,6 +34,24 @@ docker run -i -p8000:8000 --name jupyterhub jhub_srv
 Le serveur **jupyterhub** est à présent opérationnel. Ouvrez un navigateur et allez à l'adresse
 http://127.0.0.1:8000 (ou http://_votre_adresse_ip:8000 via le réseau). Vous pouvez commencer à tester un compte prof en utilisant les logins présents dans le fichier comptes.csv (par exemple prof1 / wawa)
 
+## Gérer la persistance des données
+Si vous mettez en place un serveur en production, vous voudrez que vos données survivent même si vous effacez le container pour en reconstruire un propre à partir d'une image. Les **volumes** docker sont vos amis ! Grâce à eux, vous pourrez externaliser le stockage de certains dossiers hors du container. Pour cette installation de jupyterhub, je recommande deux volumes 
+- un volume pour les espaces personnels de stockage (jh_home)
+- un volume pour la zone d'échange nbgrader (jh_exchange)
+
+Pour créer ces deux volumes, tapez les commandes suivantes
+```console
+docker volume create jh_home
+docker volume create jh_exchange
+```
+
+Pour créer un container utilisant ces volumes, il faut juste ajouter le paramètre -v NOM_VOLUME:ARBO_DANS_CONTAINER :
+```console
+docker run -it --name jhub -p 8000:8000 -v jh_home:/home -v jh_exchange:/srv/nbgrader/exchange wawachief/jupyterhub
+```
+
+et voilà, en modifiant juste la ligne de création du container, vos données sont persistantes ! Vous pouvez effacer le container et en recréer un, vous retrouverez vos données. Vous avez maintenant un serveur opérationnel pour la production.
+
 ## Quelques commandes docker utiles :
 - Pour fermer l'image, tapez CTRL+C
 
