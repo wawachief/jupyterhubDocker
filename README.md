@@ -57,11 +57,11 @@ et voilà, en modifiant juste la ligne de création du container, vos données s
 
 ### Sauvegarde et restauration des données
 
-Dans la commande ci-dessous, nous allons créer un nouveau container basé sur une ubuntu qui va accéder aux volumes de notre container jhub et fabriquer une archive tar qui sera stockée dans le répertoire courant de la machine hôte. L'option --rm permet d'effacer ce container temporaire qui ne sert qu'à la récupération des données.
+Dans la commande ci-dessous, nous allons créer un nouveau container basé sur une ubuntu qui va accéder aux volumes de notre container nommé **jhub** et fabriquer une archive *tar* qui sera stockée dans le répertoire courant de la machine hôte. L'option **--rm** permet d'effacer ce container temporaire qui ne sert qu'à la récupération des données.
 ```console
 docker run --rm --volumes-from jhub -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /home /srv/nbgrader/exchange
 ```
-La ligne suivante va restaurer l'archive backup.tar réalisée ci-dessus d'un nouveau container jhub_new que l'on a déjà lancé.
+La ligne suivante va restaurer l'archive **backup.tar** réalisée ci-dessus d'un nouveau container **jhub_new** que l'on a déjà lancé.
 ```console
 docker run --rm --volumes-from jhub_new -v $(pwd):/backup ubuntu bash -c "cd / && tar xvf /backup/backup.tar"
 ```
