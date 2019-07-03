@@ -13,9 +13,11 @@ git clone https://github.com/wawachief/jupyterhubDocker.git
 ```console
 apt-get install docker.io
 ```
+docker.io est la version de docker packagée par debian/ubuntu. Si vous rencontrez des difficultés avec cette version, vous pouvez utiliser la version officielle docker-ce dont l'installation est décrite ici :
+[https://www.digitalocean.com/community/tutorials/comment-installer-et-utiliser-docker-sur-ubuntu-18-04-fr]
 3. Allez dans le dossier *jupyterhub* et construisez votre image Docker
 ```console
-cd jupyterhub
+cd jupyterhubDocker
 docker build -t jhub_srv .
 ```
 N'oubliez pas le . à la fin de la seconde commande !
