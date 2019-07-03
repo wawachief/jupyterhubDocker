@@ -45,7 +45,10 @@ docker volume create jh_home
 docker volume create jh_exchange
 ```
 
-Pour créer un container utilisant ces volumes, il faut juste ajouter le paramètre -v NOM_VOLUME:ARBO_DANS_CONTAINER :
+Pour créer un container utilisant ces volumes, il faut juste ajouter le paramètre 
+  
+  -v NOM_VOLUME:ARBO_DANS_CONTAINER :
+
 ```console
 docker run -it --name jhub -p 8000:8000 -v jh_home:/home -v jh_exchange:/srv/nbgrader/exchange wawachief/jupyterhub
 ```
@@ -79,3 +82,9 @@ docker rm CONTAINER_ID
 ```console
 docker rmi jhub_srv
 ```
+
+- pour lister les volumes :
+docker volume ls
+
+- pour avoir des informations sur un volume :
+docker volume inspect my-vol
