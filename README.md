@@ -55,6 +55,18 @@ docker run -it --name jhub -p 8000:8000 -v jh_home:/home -v jh_exchange:/srv/nbg
 
 et voilà, en modifiant juste la ligne de création du container, vos données sont persistantes ! Vous pouvez effacer le container et en recréer un, vous retrouverez vos données. Vous avez maintenant un serveur opérationnel pour la production.
 
+### Sauvegarde et restauration des données
+
+Dans la commande ci-dessous, nous allons créer un nouveau container basé sur une ubuntu qui va accéder aux volumes de notre container jhub et fabriquer une archive tar qui sera stockée dans le répertoire courant de la machine hôte. L'option --rm permet d'effacer ce container temporaire qui ne sert qu'à la récupération des données.
+```console
+docker run --rm --volumes-from jhub -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /home /srv/nbgrader/exchange
+```
+La ligne suivante va restaurer l'archive backup.tar réalisée ci-dessus d'un nouveau container jhub_new que l'on a déjà lancé.
+```console
+docker run --rm --volumes-from jhub_new -v $(pwd):/backup ubuntu bash -c "cd / && tar xvf /backup/backup.tar"
+```
+Ces deux méthodes montrent donc comment transférer le contenu d'un container à un autre. On peut ainsi migrer facilement une installation jupyterhub sur une autre machine.
+
 ## Quelques commandes docker utiles :
 - Pour fermer l'image, tapez CTRL+C
 
