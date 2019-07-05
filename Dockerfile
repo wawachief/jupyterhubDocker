@@ -24,7 +24,16 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
         pandoc \
         sudo \
         netbase \
+	locales \
  && rm -rf /var/lib/apt/lists/* 
+
+RUN echo "fr_FR.UTF-8 UTF-8" > /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
+    && update-locale LANG=fr_FR.UTF-8 \
+    && update-locale LC_ALL=fr_FR.UTF-8
+
+ENV LC_ALL fr_FR.UTF-8
+ENV LANG fr_FR.UTF-8
 
 RUN pip install jupyter
 
@@ -56,7 +65,6 @@ RUN groupadd admin && \
 
 # Paquets pip
 
-RUN pip install --upgrade jupyterlab-server
 RUN pip install mobilechelonian \
     nbconvert \ 
     pandas \ 
@@ -66,7 +74,8 @@ RUN pip install mobilechelonian \
     ipython-sql \ 
     metakernel \ 
     pillow \
-    nbautoeval
+    nbautoeval \
+    jupyterlab-server
 
 # Creation des exemples
 
