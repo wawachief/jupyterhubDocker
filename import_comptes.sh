@@ -14,7 +14,7 @@ USER=`echo $i | awk -F";" '{ print $1 }'`
 PASS=`echo $i | awk -F";" '{ print $2 }'`
 PROF=`echo $i | awk -F";" '{ print $3 }'`
 
-/usr/sbin/useradd $USER
+/usr/sbin/useradd $USER -s /bin/bash
 echo "$USER:$PASS" | /usr/sbin/chpasswd
 
 if [ -n "$PROF" ]; then
@@ -26,8 +26,11 @@ if [ -n "$PROF" ]; then
         cp -r /home/$ADMIN/exemples /home/$USER
         mv /home/$USER/exemples/nbgrader/* /home/$USER/source
         rm -r /home/$USER/exemples/nbgrader
+        # Activation de nbgrader pour le prof $USER
         chmod -R 700 /home/$USER
         chown -R $USER /home/$USER
+        su $USER -c "/opt/conda/bin/jupyter nbextension enable --user formgrader/main --section=tree"
+        su $USER -c "/opt/conda/bin/jupyter serverextension enable --user nbgrader.server_extensions.formgrader"
 fi
 
 done
