@@ -4,8 +4,8 @@ LABEL maintainer="Olivier Lecluse <olivier.lecluse@free.fr>"
 
 USER root
 
-ARG JH_ADMIN=adminjh 
-ARG JH_PWD=wawa 
+ARG JH_ADMIN=adminjh
+ARG JH_PWD=wawa
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
         python3-pip \
@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
         pandoc \
         sudo \
         netbase \
-	    locales \
- && rm -rf /var/lib/apt/lists/* 
+        locales \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN echo "fr_FR.UTF-8 UTF-8" > /etc/locale.gen \
     && dpkg-reconfigure --frontend=noninteractive locales \
@@ -40,7 +40,7 @@ RUN pip install jupyter
 RUN useradd $JH_ADMIN --create-home --shell /bin/bash
 
 # Install nbgrader
-RUN pip install SQLAlchemy==1.2.19 nbgrader && \
+RUN pip install SQLAlchemy==1.2.19 nbgrader nbconvert==5.4.1 && \
     jupyter nbextension install --sys-prefix --py nbgrader --overwrite && \
     jupyter nbextension enable --sys-prefix --py nbgrader && \
     jupyter serverextension enable --sys-prefix --py nbgrader && \
@@ -68,13 +68,13 @@ RUN groupadd admin && \
 # Paquets pip
 
 RUN pip install mobilechelonian \
-    nbconvert \ 
-    pandas \ 
-    matplotlib  \ 
-    folium  \ 
+    nbconvert \
+    pandas \
+    matplotlib  \
+    folium  \
     geopy \
-    ipython-sql \ 
-    metakernel \ 
+    ipython-sql \
+    metakernel \
     pillow \
     nbautoeval \
     jupyterlab-server \
@@ -86,6 +86,10 @@ RUN jupyter contrib nbextension install --sys-prefix
 
 COPY --chown=1000 exemples /home/$JH_ADMIN/exemples
 
+# Dossier feedback
+RUN mkdir /srv/feedback && \
+    chmod 4777 /srv/feedback
+
 # Creation des comptes
 COPY comptes.csv /root
 COPY import_comptes.sh /usr/bin
@@ -94,4 +98,3 @@ RUN /usr/bin/import_comptes.sh /root/comptes.csv
 
 
 EXPOSE 8000
-
