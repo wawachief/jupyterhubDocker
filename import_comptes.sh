@@ -1,5 +1,5 @@
 #!/bin/bash
-  
+
 # Creation automatique de comptes
 # entree : fichier CSV separe par ;
 # login;passwd ou alors login;passwd;1 pour les profs
@@ -16,6 +16,8 @@ PROF=`echo $i | awk -F";" '{ print $3 }'`
 
 /usr/sbin/useradd $USER -s /bin/bash
 echo "$USER:$PASS" | /usr/sbin/chpasswd
+mkdir /home/$USER
+chown $USER /home/$USER
 
 if [ -n "$PROF" ]; then
         # Deploiement de la conf nbgrader
@@ -32,5 +34,9 @@ if [ -n "$PROF" ]; then
         su $USER -c "/opt/conda/bin/jupyter nbextension enable --user formgrader/main --section=tree"
         su $USER -c "/opt/conda/bin/jupyter serverextension enable --user nbgrader.server_extensions.formgrader"
 fi
+
+
+# lien feedback
+ln -s /srv/feedback /home/$USER/feedback
 
 done
