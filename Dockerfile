@@ -95,7 +95,9 @@ RUN mkdir /srv/feedback && \
 # Creation des comptes
 COPY comptes.csv /root
 COPY import_comptes.sh /usr/bin
-RUN chmod 755 /usr/bin/import_comptes.sh
+COPY killJup.sh /usr/bin
+COPY checkmem.sh /usr/bin
+RUN chmod 755 /usr/bin/*.sh
 RUN /usr/bin/import_comptes.sh /root/comptes.csv
 
 
