@@ -37,12 +37,14 @@ RUN echo "fr_FR.UTF-8 UTF-8" > /etc/locale.gen \
 ENV LC_ALL fr_FR.UTF-8
 ENV LANG fr_FR.UTF-8
 
+RUN pip install --upgrade pip
 RUN pip install jupyter
 
 RUN useradd $JH_ADMIN --create-home --shell /bin/bash
 
 # Install nbgrader
-RUN pip install SQLAlchemy==1.2.19 nbgrader nbconvert==5.4.1 && \
+
+RUN pip install SQLAlchemy nbgrader nbconvert && \
     jupyter nbextension install --sys-prefix --py nbgrader --overwrite && \
     jupyter nbextension enable --sys-prefix --py nbgrader && \
     jupyter serverextension enable --sys-prefix --py nbgrader && \

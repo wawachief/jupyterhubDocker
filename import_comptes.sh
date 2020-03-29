@@ -31,12 +31,8 @@ if [ -n "$PROF" ]; then
         # Activation de nbgrader pour le prof $USER
         chmod -R 700 /home/$USER
         chown -R $USER /home/$USER
-        su $USER -c "/opt/conda/bin/jupyter nbextension enable --user formgrader/main --section=tree"
-        su $USER -c "/opt/conda/bin/jupyter serverextension enable --user nbgrader.server_extensions.formgrader"
+        su $USER -c "/usr/local/bin/jupyter nbextension enable --user formgrader/main --section=tree"
+        su $USER -c "/usr/local/bin/jupyter serverextension enable --user nbgrader.server_extensions.formgrader"
 fi
-
-
-# lien feedback
-ln -s /srv/feedback /home/$USER/feedback
 
 done
